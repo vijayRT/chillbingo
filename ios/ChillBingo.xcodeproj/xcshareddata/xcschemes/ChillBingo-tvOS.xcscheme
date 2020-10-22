@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "chillbingo-tvOS.app"
-               BlueprintName = "chillbingo-tvOS"
-               ReferencedContainer = "container:chillbingo.xcodeproj">
+               BuildableName = "ChillBingo-tvOS.app"
+               BlueprintName = "ChillBingo-tvOS"
+               ReferencedContainer = "container:ChillBingo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "chillbingo-tvOSTests.xctest"
-               BlueprintName = "chillbingo-tvOSTests"
-               ReferencedContainer = "container:chillbingo.xcodeproj">
+               BuildableName = "ChillBingo-tvOSTests.xctest"
+               BlueprintName = "ChillBingo-tvOSTests"
+               ReferencedContainer = "container:ChillBingo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "chillbingo-tvOS.app"
-            BlueprintName = "chillbingo-tvOS"
-            ReferencedContainer = "container:chillbingo.xcodeproj">
+            BuildableName = "ChillBingo-tvOS.app"
+            BlueprintName = "ChillBingo-tvOS"
+            ReferencedContainer = "container:ChillBingo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "chillbingo-tvOS.app"
-            BlueprintName = "chillbingo-tvOS"
-            ReferencedContainer = "container:chillbingo.xcodeproj">
+            BuildableName = "ChillBingo-tvOS.app"
+            BlueprintName = "ChillBingo-tvOS"
+            ReferencedContainer = "container:ChillBingo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

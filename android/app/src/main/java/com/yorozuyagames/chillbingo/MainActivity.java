@@ -1,4 +1,5 @@
-package com.chillbingo;
+
+package com.yorozuyagames.chillbingo;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +11,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "chillbingo";
+    return "ChillBingo";
   }
 }
