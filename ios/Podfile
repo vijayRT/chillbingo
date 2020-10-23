@@ -3,12 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'chillbingo' do
+target 'ChillBingo' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'chillbingoTests' do
+  target 'ChillBingoTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +23,10 @@ target 'chillbingo' do
   end
 end
 
-target 'chillbingo-tvOS' do
-  # Pods for chillbingo-tvOS
+target 'ChillBingo-tvOS' do
+  # Pods for ChillBingo-tvOS
 
-  target 'chillbingo-tvOSTests' do
+  target 'ChillBingo-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

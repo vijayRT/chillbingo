@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "29324035126",
+    "firebase_url": "https://chill-bingo-yg.firebaseio.com",
+    "project_id": "chill-bingo-yg",
+    "storage_bucket": "chill-bingo-yg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29324035126:android:6cf8fa3418db4cecf4c497",
+        "android_client_info": {
+          "package_name": "com.yorozuyagames.chillbingo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29324035126-d40d11vv6s8absinl1csts0kijtlfrvu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yorozuyagames.chillbingo",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "29324035126-hdd4a8uelaju6rprjhonbigp82llpard.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwK6wgDEWNbMag14dIsfZqnaUZnyeGWNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29324035126-hdd4a8uelaju6rprjhonbigp82llpard.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

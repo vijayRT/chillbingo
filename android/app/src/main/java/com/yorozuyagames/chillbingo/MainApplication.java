@@ -1,4 +1,4 @@
-package com.chillbingo;
+package com.yorozuyagames.chillbingo;
 
 import android.app.Application;
 import android.content.Context;

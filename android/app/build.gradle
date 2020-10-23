@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 
 /**
@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.chillbingo"
+        applicationId "com.yorozuyagames.chillbingo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
