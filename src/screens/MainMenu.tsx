@@ -1,20 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'react-native-elements'
-import { StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
+import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
 import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
 import JoinRoomOverlay from '../components/MainMenu/JoinRoomOverlay';
+import {Themes, useThemeStore} from '../store/Themes'
+import {ThemedButton} from '../components/ThemedButton'
+import Theme, { createTheme, createStyle, createThemedComponent } from 'react-native-theming';
+import {useSoundStore} from '../store/sounds'
 //import { render } from 'react-dom';
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
+    // const activeTheme=useThemeStore(state=>state.activeTheme)
+    const setActiveTheme=useThemeStore(state=>state.setActiveTheme)
+    const activeThemeRef=useRef(useThemeStore.getState().activeTheme)
+    useEffect(() => useThemeStore.subscribe(
+        activeTheme => (activeThemeRef.current = activeTheme), 
+        state => state.activeTheme
+      ), [])
+    const buttonPress = useSoundStore(state => state.buttonPress)
+    const changeTheme=() =>{
+        setActiveTheme('sakura')
+        activeThemeRef.current.apply()
+        
+    }
+    function navigateWithSound(buttonName) {
+        buttonPress.play();
+        navigation.navigate(buttonName)
+    }
     const [createRoomVisible, setCreateRoomVisible] = useState(false);
     const toggleCreateRoomOverlay = () => {
+        buttonPress.play();
         console.log("pressed toggle")
         setCreateRoomVisible(!createRoomVisible);
     };
 
     const [joinRoomVisible, setJoinRoomVisible] = useState(false);
     const toggleJoinRoomOverlay = () => {
+        buttonPress.play()
         console.log("pressed toggle")
         setJoinRoomVisible(!joinRoomVisible);
     };
@@ -28,50 +51,59 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
     }
 
     const renderJoinRoomOverlay = () => {
+        
         if (joinRoomVisible) {
+            
             return <JoinRoomOverlay onBackdropPress={toggleJoinRoomOverlay}/>
         }
     }
+    
     return (
+
         <View style={styles.screen}>
-            <ImageBackground source={require('../../assets/galaxy.jpg')} style={styles.imageBackground}>
+            <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
                 <View style={styles.topContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Settings')} >
+                    <TouchableOpacity onPress={() => navigateWithSound("Settings")} >
                         <Image source={require('../../assets/gears_white.png')} style={styles.settingImage}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('AvatarScreen')} >
+                    <TouchableOpacity onPress={() => navigateWithSound("AvatarScreen")} >
                         <Image source={require('../../assets/person.png')} style={styles.profileImage} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.logoContainer}>
-                    <Image source={require('../../assets/bingo_logo_light.png')} style={styles.logoImage} />
+                    {/* <Image source={require('../../assets/bingo_logo_light.png')} style={styles.logoImage} /> */}
+                    <Theme.Text style ={styles.logoText1}  >CHILL</Theme.Text><Theme.Text style={styles.logoText2}>BINGO</Theme.Text>
                 </View>
 
                 <View style={styles.menuContainer}>
-                    <Button raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Vs AI" titleStyle={styles.buttonText}
+                <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                        title="Toggle Theme" titleStyle={styles.buttonText} onPress={() => changeTheme()}
                     />
-                    <Button raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                        title="Vs AI" onPress={() => navigateWithSound("VsAI")} titleStyle={styles.buttonText}
+                    />
+                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Join Room" onPress={toggleJoinRoomOverlay} titleStyle={styles.buttonText} />
 
-                    <Button raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Create Room" onPress={toggleCreateRoomOverlay} titleStyle={styles.buttonText}
                     />
                     <>{renderCreateRoomOverlay()}</>
                     <>{renderJoinRoomOverlay()}</>
-                    <Button raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Online" titleStyle={styles.buttonText}
+                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                        title="Online" onPress={() => navigateWithSound("Online")} titleStyle={styles.buttonText}
                     />
                 </View>
-            </ImageBackground>
+            </Theme.ImageBackground>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = createStyle({
     screen: {
-        flex: 1
+        flex: 1,
+        
     },
     topContainer: {
         flex: 1,
@@ -84,7 +116,7 @@ const styles = StyleSheet.create({
     logoContainer: {
         flex: 2,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     menuContainer: {
         paddingTop: 50,
@@ -94,13 +126,14 @@ const styles = StyleSheet.create({
     imageBackground: {
         flex: 1,
         width: "100%",
-        height: "100%"
+        height: "100%",
+        // resizeMode: 'center',
     },
     button: {
         width: 230,
         height: 57,
-        backgroundColor: '#3B3B3B',
-        borderRadius: 50,
+        backgroundColor: '@backgroundColor',
+        borderRadius: 10,
 
 
     },
@@ -108,7 +141,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     buttonText: {
-        fontSize: 18
+        fontSize: 18,
+        fontFamily:'@fontFamily'
     },
     logoImage: {
         resizeMode: 'contain',
@@ -198,4 +232,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
     },
+    logoText1:{
+        fontSize:70,
+        fontFamily:'@fontFamily',
+        color:'@logoColor1',
+    },
+    logoText2:{
+        fontSize:70,
+        fontFamily:'@fontFamily',
+        color:'@logoColor2',
+
+    }
 });

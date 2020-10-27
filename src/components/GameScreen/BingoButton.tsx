@@ -1,16 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import {  createStyle} from 'react-native-theming';
+import {ThemedButton} from '../ThemedButton'
 
 export interface BingoButtonProps {
   displayedValue: string,
   // arrayIndex: number
 }
 export default function BingoButton(props: BingoButtonProps) {
+  
   const [activeBtn, setActiveBtn] = useState(2);
   return (
     <View style={styles.buttonContainer}>
-      <Button buttonStyle={styles.buttonColor} containerStyle={[styles.button, { zIndex: activeBtn }]}
+      <ThemedButton buttonStyle={styles.buttonColor} containerStyle={[styles.button, { zIndex: activeBtn }]}
         title={props.displayedValue} titleStyle={styles.button_text}
         onPress={() => setActiveBtn(activeBtn - 1)}
       />
@@ -21,10 +23,10 @@ export default function BingoButton(props: BingoButtonProps) {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = createStyle({
   button: {
     flex: 1,
-    backgroundColor: '#4a1f28',
+    backgroundColor: '@backgroundColor',
     justifyContent: 'center',
     margin: 3,
     aspectRatio: 1,
@@ -32,11 +34,11 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   buttonColor: {
-    backgroundColor: '#4a1f28',
+    backgroundColor: '@backgroundColor',
   },
   button_text: {
     fontSize: 24,
-    fontFamily: 'cherryblossom',
+    fontFamily: '@fontFamily',
   },
   buttonContainer: {
     flex: 1,

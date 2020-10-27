@@ -6,18 +6,19 @@ import BingoText from '../components/GameScreen/BingoText';
 import CalledNumbers from '../components/GameScreen/CalledNumbers';
 import AvatarBlock from '../components/GameScreen/AvatarBlock';
 import {GameScreenProps} from '../../types';
+import Theme from 'react-native-theming';
 
 export default function GameScreen({}: GameScreenProps) {
   return (
     <View style={styles.body}>
-      <ImageBackground
-        source={require('../../assets/cherryblossom.jpg')}
+      <Theme.ImageBackground
+        source='@backgroundImage'
         style={styles.imageBg}>
         <AvatarBlock />
         <CalledNumbers />
         <BingoText />
         <BingoBoard />
-      </ImageBackground>
+      </Theme.ImageBackground>
     </View>
   );
 }

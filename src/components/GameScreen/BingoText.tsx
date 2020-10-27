@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
+import {ThemedButton} from '../ThemedButton'
 
 export default function BingoText() {
   const [animationType, setAnimationType] = useState('jello');
@@ -18,19 +19,19 @@ export default function BingoText() {
   return (
     <View style={styles.bingoLetters}>
       <Animatable.View animation={animationType} iterationCount={iteration}  >
-        <Button buttonStyle={[styles.bingoLettersButton, { backgroundColor: bgColor }]} title={'B'} titleStyle={styles.bingoLettersTitle} onPress={() => PressTransform()} />
+        <ThemedButton buttonStyle={[styles.bingoLettersButton, { backgroundColor: bgColor }]} title={'B'} titleStyle={styles.bingoLettersTitle} onPress={() => PressTransform()} />
       </Animatable.View>
       <Animatable.View animation={animationType} iterationCount={'infinite'} >
-        <Button buttonStyle={styles.bingoLettersButton} title={'I'} titleStyle={styles.bingoLettersTitle} />
+        <ThemedButton buttonStyle={styles.bingoLettersButton} title={'I'} titleStyle={styles.bingoLettersTitle} />
       </Animatable.View>
       <Animatable.View animation={animationType} iterationCount={'infinite'} >
-        <Button buttonStyle={styles.bingoLettersButton} title={'N'} titleStyle={styles.bingoLettersTitle} />
+        <ThemedButton buttonStyle={styles.bingoLettersButton} title={'N'} titleStyle={styles.bingoLettersTitle} />
       </Animatable.View>
       <Animatable.View animation={animationType} iterationCount={'infinite'} >
-        <Button buttonStyle={styles.bingoLettersButton} title={'G'} titleStyle={styles.bingoLettersTitle} />
+        <ThemedButton buttonStyle={styles.bingoLettersButton} title={'G'} titleStyle={styles.bingoLettersTitle} />
       </Animatable.View>
       <Animatable.View animation={animationType} iterationCount={'infinite'} >
-        <Button buttonStyle={styles.bingoLettersButton} title={'O'} titleStyle={styles.bingoLettersTitle} />
+        <ThemedButton buttonStyle={styles.bingoLettersButton} title={'O'} titleStyle={styles.bingoLettersTitle} />
       </Animatable.View>
     </View>
   )
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   bingoLettersTitle: {
     fontSize: 50,
-    fontFamily: 'cherryblossom',
+    fontFamily: '@fontFamily',
   },
 
 

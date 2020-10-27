@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Button, Overlay } from 'react-native-elements';
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { AvatarScreenProps } from "../../types"
+import Theme,{  createStyle} from 'react-native-theming';
+import {ThemedButton} from '../components/ThemedButton'
+import ThemeCarousel from '../components/ThemeScreen/ThemeCarousel'
 //import Carousel from 'react-native-snap-carousel';
 
 export default function AvatarScreen({ navigation }: AvatarScreenProps) {
     return (
-        <ImageBackground source={require('../../assets/galaxy.jpg')} style={styles.imageBackground}>
+        <Theme.ImageBackground source='@backgroundImage' style={styles.imageBackground}>
             <View style={styles.container}>
                 {/* Top Container */}
                 <View style={styles.topContainer}>
@@ -17,57 +20,38 @@ export default function AvatarScreen({ navigation }: AvatarScreenProps) {
 
                 {/* Button Container */}
                 <View style={styles.menuContainer}>
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Avatar" titleStyle={styles.buttonText}
+                <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                        title="Themes" titleStyle={styles.buttonText}
+                    />
+                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                        title="Avatars" titleStyle={styles.buttonText}
                     />
 
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Board Skin" titleStyle={styles.buttonText}
-                    />
+
                 </View>
 
-                <View style={styles.profileContainer}>
-                    <View style={styles.shopProfileAndText}>
-                        <Image source={require('../../assets/person.png')} style={styles.profileImage} />
-                    </View>
-
-                    <View style={styles.shopProfileAndText}>
-                        <Image source={require('../../assets/person.png')} style={styles.profileImage} />
-                    </View>
-
-                    <View style={styles.shopProfileAndText}>
-                        <Image source={require('../../assets/person.png')} style={styles.profileImage} />
-                    </View>
-
-                    <View style={styles.shopProfileAndText}>
-                        <Image source={require('../../assets/person.png')} style={styles.profileImage} />
-                    </View>
-                </View>
-
-                <View style={styles.profileImageBigContainer}>
-                    <View style={styles.shopProfileAndText}>
-                        <Image source={require('../../assets/person.png')} style={styles.profileImageBigSize} />
-                    </View>
-                </View>
+<View style={styles.carouselContainer}>
+<ThemeCarousel/>
+</View>
 
                 <View style={styles.menuContainer}>
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Purchase" titleStyle={styles.buttonText}
                     />
 
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Equip" titleStyle={styles.buttonText}
                     />
                 </View>
 
             </View>
 
-        </ImageBackground>
+        </Theme.ImageBackground>
 
     );
 };
 
-const styles = StyleSheet.create({
+const styles = createStyle({
     container: {
         flex: 1,
     },
@@ -100,12 +84,13 @@ const styles = StyleSheet.create({
     button: {
         //width: 230,
         //height: 57,
-        backgroundColor: '#3B3B3B',
+        backgroundColor: '@backgroundColor',
         //borderRadius: 50,
     },
 
     buttonText: {
-        fontSize: 18
+        fontSize: 18,
+        fontFamily:'@fontFamily'
     },
     profileContainer: {
         flex: 1,
@@ -140,5 +125,11 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
     },
+    carouselContainer:{
+        flex:4,
+        alignItems:'center',
+        justifyContent:'center'
+
+    }
 
 });

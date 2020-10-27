@@ -4,6 +4,7 @@ import BingoButton from "./BingoButton"
 
 
 export default function BingoBoard() {
+
     let bingoSize = 25;
     let rowLoop: Array<JSX.Element> = [];
     let gridLoop: Array<JSX.Element> = [];
