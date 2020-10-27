@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Image, Overlay, Text, Input } from 'react-native-elements'
-import { StyleSheet, View, Clipboard, TextInput } from 'react-native'
+import { Button, Overlay, Text, Input } from 'react-native-elements'
+import { StyleSheet,  Image,View, Clipboard, TextInput } from 'react-native'
 import { GameScreenProps } from "../../../types"
-
+import Theme, { createStyle } from 'react-native-theming';
+import { ThemedButton, ThemedOverlay } from '../ThemedComponents'
 
 export default function CreateRoomOverlay({ toggleCreateRoomOverlay, navigation }: GameScreenProps) {
 
@@ -15,31 +16,31 @@ export default function CreateRoomOverlay({ toggleCreateRoomOverlay, navigation 
     }
 
     return (
-        <Overlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={toggleCreateRoomOverlay}>
-            <View style={styles.overlayContainer}>
+        <ThemedOverlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={toggleCreateRoomOverlay}>
+            <Theme.View style={styles.overlayContainer}>
                 <View style={styles.overlayHeading}>
-                    <Text style={styles.createRoomText}>Create Room</Text>
+                    <Theme.Text style={styles.createRoomText}>Create Room</Theme.Text>
                 </View>
 
                 <View style={styles.overlayProfile} >
                     <View style={styles.overlayProfileAndText}>
                         <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>Shadow</Text>
+                        <Theme.Text style={styles.overlayProfileText}>Shadow</Theme.Text>
                     </View>
 
                     <View style={styles.overlayProfileAndText}>
                         <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>Kyoma</Text>
+                        <Theme.Text style={styles.overlayProfileText}>Kyoma</Theme.Text>
                     </View>
 
                     <View style={styles.overlayProfileAndText}>
                         <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>KronosFear</Text>
+                        <Theme.Text style={styles.overlayProfileText}>KronosFear</Theme.Text>
                     </View>
 
                     <View style={styles.overlayProfileAndText}>
                         <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>OppaiLover</Text>
+                        <Theme.Text style={styles.overlayProfileText}>OppaiLover</Theme.Text>
                     </View>
 
                 </View>
@@ -63,16 +64,16 @@ export default function CreateRoomOverlay({ toggleCreateRoomOverlay, navigation 
                     {/* Start Game Button */}
 
                     <View style={styles.startContainer}>
-                        <Button buttonStyle={styles.startButton}
+                        <ThemedButton buttonStyle={styles.startButton}
                             title="Start Game" titleStyle={styles.startButtonText} onPress={() => {toggleCreateRoomOverlay() 
                                 navigation.navigate('GameScreen')
                             }} />
                     </View>
-                </View>
-            </Overlay>
+                </Theme.View>
+            </ThemedOverlay>
     );
 }
-const styles = StyleSheet.create({
+const styles = createStyle({
                 overlayContainer: {
                 flex: 1,
     },
@@ -83,13 +84,16 @@ const styles = StyleSheet.create({
     },
     overlayStyle:
             {
-                backgroundColor: 'rgba(52, 52, 52, 0.9)',
-        height: "70%",
+            backgroundColor: '@overlayColor',
+        height: "85%",
         width: "80%",
         borderRadius: 30,
+        borderColor:'white',
+        borderWidth:2
     },
     overlayHeading: {
                 flex: 1,
+                justifyContent:'center'
     },
     overlayProfile: {
                 flex: 3,
@@ -102,19 +106,21 @@ const styles = StyleSheet.create({
     },
     overlayProfileText: {
                 marginLeft: 30,
-        color: 'white',
+        color: '@overlayTextColor',
         marginTop: 10,
         textAlign: 'center',
         fontSize: 22,
+        fontFamily:'@fontFamily'
 
     },
 
     createRoomText:
             {
-                color: 'white',
+                color: '@overlayTextColor',
         marginTop: 10,
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 26,
+        fontFamily:'@fontFamily'
     },
     createLink: {
                 flex: 1,
@@ -141,8 +147,8 @@ const styles = StyleSheet.create({
         //alignContent:'center',
     },
     startButton: {
-                backgroundColor: 'blue',
-        borderRadius: 50,
+                backgroundColor: '@backgroundColor',
+        borderRadius: 10,
         width: 250,
         height: 50,
 
@@ -150,5 +156,6 @@ const styles = StyleSheet.create({
     startButtonText: {
                 fontSize: 18,
         color: 'white',
+        fontFamily:'@fontFamily'
     },
 });

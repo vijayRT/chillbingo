@@ -10,34 +10,40 @@ export const useThemeStore = create((set, get) => ({
 
   themes: {
     neonCity: createTheme({
-      backgroundColor: 'purple',
+      backgroundColor: '#F7138E',
       textColor: 'white',
+      overlayTextColor:'white',
       backgroundImage: require('../../assets/neoncity.jpg'),
       logoColor1: 'white',
       logoColor2: '#F4A227',
       fontFamily: 'NeonFuture',
-      textShadowColor:'white'
+      textShadowColor:'white',
+      overlayColor:'#0b0023'
 
     }, 'neonCity'),
 
     sakura: createTheme({
       backgroundColor: '#4a1f28',
       textColor: 'white',
+      overlayTextColor:'#4a1f28',
       backgroundImage: require('../../assets/cherryblossom.jpg'),
       logoColor1: 'white',
       logoColor2: '#4a1f28',
       fontFamily: 'cherryblossom',
       textShadowColor:'white',
+      overlayColor:'#f0c9cd'
     }, 'sakura'),
   },
   activeTheme: createTheme({
-    backgroundColor: 'purple',
+    backgroundColor: '#F7138E',
     textColor: 'white',
+    overlayTextColor:'white',
     backgroundImage: require('../../assets/neoncity.jpg'),
     logoColor1: 'white',
     logoColor2: '#F4A227',
     fontFamily: 'NeonFuture',
     textShadowColor:'white',
+    overlayColor:'#0b0023'
   }, 'neonCity'),
   setActiveTheme: (themeName) => {
     const theme = get().themes[themeName]
