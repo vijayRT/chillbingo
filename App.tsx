@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Settings from './src/screens/Settings';
 import MainMenu from './src/screens/MainMenu';
 import GameScreen from './src/screens/GameScreen';
-import AvatarScreen from './src/screens/AvatarScreen';
+import AvatarScreen from './src/screens/ShopScreen';
 import Authentication from './src/screens/Authentication';
 import { usePlayerStore } from './src/store/player';import { StatusBar } from 'react-native';
 ``

@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
-
+import {ThemedButton} from '../ThemedComponents'
 export default function CalledNumbers() {
     return(
         <View style={styles.calledNumbers}>
           <View style={styles.oldNumbers}>
-          <Button buttonStyle={styles.calledNumber} title={'1'} titleStyle={styles.calledNumberText} />
-          <Button buttonStyle={styles.calledNumber} title={'2'} titleStyle={styles.calledNumberText} />
-          <Button buttonStyle={styles.calledNumber} title={'3'} titleStyle={styles.calledNumberText} />
+          <ThemedButton buttonStyle={styles.calledNumber} title={'1'} titleStyle={styles.calledNumberText} />
+          <ThemedButton buttonStyle={styles.calledNumber} title={'2'} titleStyle={styles.calledNumberText} />
+          <ThemedButton buttonStyle={styles.calledNumber} title={'3'} titleStyle={styles.calledNumberText} />
 
           </View>
 
           <View style={styles.mainNumber}>
-          <Button buttonStyle={styles.calledNumberMain} title={'4'} titleStyle={[styles.calledNumberText,{fontSize:50}]} />
+          <ThemedButton buttonStyle={styles.calledNumberMain} title={'4'} titleStyle={[styles.calledNumberText,{fontSize:50}]} />
           </View>
           <View style={styles.emptyFlex}></View>
         </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
       },
       calledNumberText: {
         fontSize: 24,
-        fontFamily: 'cherryblossom',
+        fontFamily: '@fontFamily',
       },
       emptyFlex:{
         flex:2

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Overlay, Image } from 'react-native-elements';
 import Slider from '@react-native-community/slider';
-import { StyleSheet, Text, View, Alert, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { SettingsScreenProps } from "../../types"
 
 export default function Settings({navigation}: SettingsScreenProps) {
