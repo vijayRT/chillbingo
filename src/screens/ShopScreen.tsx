@@ -1,45 +1,43 @@
-import React, { useState } from 'react';
-import { Button, Overlay } from 'react-native-elements';
-import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import React from 'react'
+import { View, Image } from 'react-native';
 import { AvatarScreenProps } from "../../types"
-import Theme,{  createStyle} from 'react-native-theming';
-import {ThemedButton} from '../components/ThemedButton'
+import Theme, { createStyle } from 'react-native-theming';
+import { ThemedButton } from '../components/ThemedComponents'
 import ThemeCarousel from '../components/ThemeScreen/ThemeCarousel'
-//import Carousel from 'react-native-snap-carousel';
+
 
 export default function AvatarScreen({ navigation }: AvatarScreenProps) {
+
     return (
         <Theme.ImageBackground source='@backgroundImage' style={styles.imageBackground}>
             <View style={styles.container}>
                 {/* Top Container */}
                 <View style={styles.topContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate('MainMenu')}>
-                        <Image source={require('../../assets/gears_white.png')} style={styles.backImage} />
-                    </TouchableOpacity>
+                    <Image source={require('../../assets/gears_white.png')} style={styles.backImage} />
                 </View>
 
                 {/* Button Container */}
                 <View style={styles.menuContainer}>
-                <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton buttonStyle={styles.button}
                         title="Themes" titleStyle={styles.buttonText}
                     />
-                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton buttonStyle={styles.button}
                         title="Avatars" titleStyle={styles.buttonText}
                     />
 
 
                 </View>
 
-<View style={styles.carouselContainer}>
-<ThemeCarousel/>
-</View>
+                <View style={styles.carouselContainer}>
+                    <ThemeCarousel />
+                </View>
 
                 <View style={styles.menuContainer}>
-                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton buttonStyle={styles.button}
                         title="Purchase" titleStyle={styles.buttonText}
                     />
 
-                    <ThemedButton containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton buttonStyle={styles.button}
                         title="Equip" titleStyle={styles.buttonText}
                     />
                 </View>
@@ -77,20 +75,15 @@ const styles = createStyle({
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
-    buttonContainer: {
-        //justifyContent:'space-around',
 
-    },
     button: {
-        //width: 230,
-        //height: 57,
         backgroundColor: '@backgroundColor',
-        //borderRadius: 50,
+
     },
 
     buttonText: {
         fontSize: 18,
-        fontFamily:'@fontFamily'
+        fontFamily: '@fontFamily'
     },
     profileContainer: {
         flex: 1,
@@ -125,10 +118,10 @@ const styles = createStyle({
         width: 200,
         height: 200,
     },
-    carouselContainer:{
-        flex:4,
-        alignItems:'center',
-        justifyContent:'center'
+    carouselContainer: {
+        flex: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
 
     }
 

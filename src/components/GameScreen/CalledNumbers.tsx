@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import {ThemedButton} from '../ThemedButton'
+import {ThemedButton} from '../ThemedComponents'
 export default function CalledNumbers() {
     return(
         <View style={styles.calledNumbers}>

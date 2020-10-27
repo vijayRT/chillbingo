@@ -1,37 +1,69 @@
-import React, { PureComponent } from 'react';
-import { Text, Dimensions, Image, StyleSheet, View } from 'react-native';
- 
-import SwiperFlatList from 'react-native-swiper-flatlist';
-// import Theme,{  createStyle} from 'react-native-theming';
-import Theme,{  createStyle} from 'react-native-theming';
- 
+import React from 'react'
+import { Image, View } from 'react-native'
+import { createStyle } from 'react-native-theming';
+import Swiper from 'react-native-swiper'
+
 export default function ThemeCarousel() {
-
+  function nextArrow() {
     return (
-        <SwiperFlatList
-          index={0}
-          showPagination
-        >
-            <Image style={styles.carouselImage} source={require('../../../assets/gintoki.png')}></Image>
-            <Image style={styles.carouselImage} source={require('../../../assets/kazuma.png')}></Image>
-            <Image style={styles.carouselImage} source={require('../../../assets/saiki.jpg')}></Image>
-    
-        </SwiperFlatList>
-    );
+      <View style={styles.arrowContainer}>
+        <Image source={require('../../../assets/rightarrow.png')} style={styles.arrow} />
+      </View>
+    )
   }
- 
-export const { width, height } = Dimensions.get('window');
-const styles = createStyle({
-carousel:{
-  flex:2
-},
-carouselImage:{
-  width:300,
-  height:300,
-  resizeMode:'contain',margin:10
-}
+  function previousArrow() {
+    return (
+      <View style={styles.arrowContainer}>
+        <Image source={require('../../../assets/leftarrow.png')} style={styles.arrow} />
+      </View>
+    )
+  }
+  return (
+    <Swiper showsButtons={true} dotColor='white' activeDotColor='purple' nextButton={nextArrow()} prevButton={previousArrow()} containerStyle={styles.carousel}>
+      <View style={styles.imageContainer}>
 
+        <Image style={styles.carouselImage} source={require('../../../assets/cherryblossom.jpg')}></Image>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image style={styles.carouselImage} source={require('../../../assets/neoncity.jpg')}></Image>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image style={styles.carouselImage} source={require('../../../assets/saiki.jpg')}></Image>
+      </View>
+
+
+    </Swiper>
+  )
+}
+const styles = createStyle({
+  carousel: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  carouselImage: {
+    width: 250,
+    height: 400,
+    borderWidth: 4,
+    borderColor: 'black',
+    borderRadius: 20,
+  },
+  logo: {
+    fontSize: 30,
+    fontFamily: 'cherryblossom',
+    zIndex: 2
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+
+
+  },
+  arrow: {
+    width: 40,
+    height: 40,
+    marginBottom: 90
+  }
 
 
 })
- 

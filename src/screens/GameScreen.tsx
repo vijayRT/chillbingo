@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {View, StyleSheet, ImageBackground} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import BingoBoard from '../components/GameScreen/BingoBoard';
 import BingoText from '../components/GameScreen/BingoText';
 import CalledNumbers from '../components/GameScreen/CalledNumbers';

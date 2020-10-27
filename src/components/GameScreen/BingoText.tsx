@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
-import {ThemedButton} from '../ThemedButton'
+import {ThemedButton} from '../ThemedComponents'
 
 export default function BingoText() {
   const [animationType, setAnimationType] = useState('jello');

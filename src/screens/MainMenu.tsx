@@ -1,28 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button } from 'react-native-elements'
-import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
+
+import { View, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
 import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
 import JoinRoomOverlay from '../components/MainMenu/JoinRoomOverlay';
-import {Themes, useThemeStore} from '../store/Themes'
-import {ThemedButton} from '../components/ThemedButton'
-import Theme, { createTheme, createStyle, createThemedComponent } from 'react-native-theming';
-import {useSoundStore} from '../store/sounds'
-//import { render } from 'react-dom';
+import { useThemeStore } from '../store/Themes'
+import { ThemedButton } from '../components/ThemedComponents'
+import Theme, { createStyle } from 'react-native-theming';
+import { useSoundStore } from '../store/sounds'
+
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
-    // const activeTheme=useThemeStore(state=>state.activeTheme)
-    const setActiveTheme=useThemeStore(state=>state.setActiveTheme)
-    const activeThemeRef=useRef(useThemeStore.getState().activeTheme)
+    const setActiveTheme = useThemeStore(state => state.setActiveTheme)
+    const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
     useEffect(() => useThemeStore.subscribe(
-        activeTheme => (activeThemeRef.current = activeTheme), 
+        activeTheme => (activeThemeRef.current = activeTheme),
         state => state.activeTheme
-      ), [])
+    ), [])
     const buttonPress = useSoundStore(state => state.buttonPress)
-    const changeTheme=() =>{
+    const changeTheme = () => {
         setActiveTheme('sakura')
         activeThemeRef.current.apply()
-        
+
     }
     function navigateWithSound(buttonName) {
         buttonPress.play();
@@ -45,26 +44,26 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
     const renderCreateRoomOverlay = () => {
         if (createRoomVisible) {
             return (
-                <CreateRoomOverlay toggleCreateRoomOverlay={toggleCreateRoomOverlay } navigation={navigation}/>
+                <CreateRoomOverlay toggleCreateRoomOverlay={toggleCreateRoomOverlay} navigation={navigation} />
             )
         }
     }
 
     const renderJoinRoomOverlay = () => {
-        
+
         if (joinRoomVisible) {
-            
-            return <JoinRoomOverlay onBackdropPress={toggleJoinRoomOverlay}/>
+
+            return <JoinRoomOverlay onBackdropPress={toggleJoinRoomOverlay} />
         }
     }
-    
+
     return (
 
         <View style={styles.screen}>
             <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
                 <View style={styles.topContainer}>
                     <TouchableOpacity onPress={() => navigateWithSound("Settings")} >
-                        <Image source={require('../../assets/gears_white.png')} style={styles.settingImage}/>
+                        <Image source={require('../../assets/gears_white.png')} style={styles.settingImage} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateWithSound("AvatarScreen")} >
                         <Image source={require('../../assets/person.png')} style={styles.profileImage} />
@@ -72,12 +71,12 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
                 </View>
 
                 <View style={styles.logoContainer}>
-                    {/* <Image source={require('../../assets/bingo_logo_light.png')} style={styles.logoImage} /> */}
-                    <Theme.Text style ={styles.logoText1}  >CHILL</Theme.Text><Theme.Text style={styles.logoText2}>BINGO</Theme.Text>
+
+                    <Theme.Text style={styles.logoText1}  >CHILL</Theme.Text><Theme.Text style={styles.logoText2}>BINGO</Theme.Text>
                 </View>
 
                 <View style={styles.menuContainer}>
-                <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Toggle Theme" titleStyle={styles.buttonText} onPress={() => changeTheme()}
                     />
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
@@ -103,7 +102,7 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
 const styles = createStyle({
     screen: {
         flex: 1,
-        
+
     },
     topContainer: {
         flex: 1,
@@ -142,7 +141,7 @@ const styles = createStyle({
     },
     buttonText: {
         fontSize: 18,
-        fontFamily:'@fontFamily'
+        fontFamily: '@fontFamily'
     },
     logoImage: {
         resizeMode: 'contain',
@@ -232,15 +231,15 @@ const styles = createStyle({
         fontSize: 18,
         color: 'white',
     },
-    logoText1:{
-        fontSize:70,
-        fontFamily:'@fontFamily',
-        color:'@logoColor1',
+    logoText1: {
+        fontSize: 70,
+        fontFamily: '@fontFamily',
+        color: '@logoColor1',
     },
-    logoText2:{
-        fontSize:70,
-        fontFamily:'@fontFamily',
-        color:'@logoColor2',
+    logoText2: {
+        fontSize: 70,
+        fontFamily: '@fontFamily',
+        color: '@logoColor2',
 
     }
 });

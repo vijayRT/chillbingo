@@ -1,11 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import {View } from 'react-native';
 import {  createStyle} from 'react-native-theming';
-import {ThemedButton} from '../ThemedButton'
+import {ThemedButton} from '../ThemedComponents'
 
 export interface BingoButtonProps {
   displayedValue: string,
-  // arrayIndex: number
 }
 export default function BingoButton(props: BingoButtonProps) {
   
@@ -50,7 +49,6 @@ const styles = createStyle({
     position: 'absolute',
     transform: [{ rotate: '25deg' }],
     zIndex: 1,
-    // height:10,
     width: 30,
     borderColor: 'red',
     borderWidth: 3,
