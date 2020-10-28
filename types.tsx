@@ -2,14 +2,16 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 type RootStackParamList = {
   MainMenu: undefined;
-  Settings: undefined;
+  ProfileScreen: undefined;
   GameScreen: undefined;
   AvatarScreen: undefined;
 };
-export type MainMenuScreenProps = StackScreenProps<RootStackParamList,'MainMenu'>;
-export type SettingsScreenProps = StackScreenProps<
+export type MainMenuScreenProps = StackScreenProps<
+RootStackParamList,
+'MainMenu'>;
+export type ProfileScreenProps = StackScreenProps<
   RootStackParamList,
-  'Settings'
+  'ProfileScreen'
 >;
 export type GameScreenProps = StackScreenProps<
   RootStackParamList,

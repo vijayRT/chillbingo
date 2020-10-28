@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Settings from './src/screens/Settings';
+import ProfileScreen from './src/screens/ProfileScreen';
 import MainMenu from './src/screens/MainMenu';
 import GameScreen from './src/screens/GameScreen';
 import AvatarScreen from './src/screens/ShopScreen';
@@ -20,8 +20,8 @@ export default function App() {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name="Settings"
-                    component={Settings}
+                    name="ProfileScreen"
+                    component={ProfileScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

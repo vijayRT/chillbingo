@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-
+import {Icon} from 'react-native-elements'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
 import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
 import JoinRoomOverlay from '../components/MainMenu/JoinRoomOverlay';
 import { useThemeStore } from '../store/Themes'
-import { ThemedButton } from '../components/ThemedComponents'
+import { ThemedButton,ThemedIcon } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
 import { useSoundStore } from '../store/sounds'
 
@@ -62,11 +62,11 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
         <View style={styles.screen}>
             <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
                 <View style={styles.topContainer}>
-                    <TouchableOpacity onPress={() => navigateWithSound("Settings")} >
-                        <Image source={require('../../assets/gears_white.png')} style={styles.settingImage} />
+                    <TouchableOpacity onPress={() => navigateWithSound("ProfileScreen")} >
+                        <Image source={require('../../assets/gintoki.png')} style={styles.profileScreenImage} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateWithSound("AvatarScreen")} >
-                        <Image source={require('../../assets/person.png')} style={styles.profileImage} />
+                        <ThemedIcon size= {50} iconStyle={styles.shopIcon} name='shopping-cart'/>
                     </TouchableOpacity>
                 </View>
 
@@ -148,15 +148,21 @@ const styles = createStyle({
         width: 300,
         height: 70,
     },
-    settingImage: {
+    profileScreenImage: {
         resizeMode: 'contain',
-        width: 50,
-        height: 50,
+        width: 80,
+        height: 80,
+        borderRadius:20
+
     },
     profileImage: {
         resizeMode: 'contain',
         width: 50,
         height: 50,
+    },
+    shopIcon:{
+        color:'@overlayTextColor',
+    
     },
     overlayContainer: {
         flex: 1,
