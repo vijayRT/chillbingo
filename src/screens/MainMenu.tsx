@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import {Icon} from 'react-native-elements'
+import React, {useState } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
 import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
 import JoinRoomOverlay from '../components/MainMenu/JoinRoomOverlay';
-import { useThemeStore } from '../store/Themes'
 import { ThemedButton,ThemedIcon } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
 import { useSoundStore } from '../store/sounds'
@@ -12,20 +10,9 @@ import { useRoomStore } from '../store/room';
 
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
-    const setActiveTheme = useThemeStore(state => state.setActiveTheme)
-    const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
-    useEffect(() => useThemeStore.subscribe(
-        activeTheme => (activeThemeRef.current = activeTheme),
-        state => state.activeTheme
-    ), [])
     const buttonPress = useSoundStore(state => state.buttonPress)
     const createRoom = useRoomStore((state) => state.createRoom)
     
-    const changeTheme = () => {
-        setActiveTheme('sakura')
-        activeThemeRef.current.apply()
-
-    }
     function navigateWithSound(buttonName) {
         buttonPress.play();
         navigation.navigate(buttonName)
@@ -80,9 +67,6 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
                 </View>
 
                 <View style={styles.menuContainer}>
-                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Toggle Theme" titleStyle={styles.buttonText} onPress={() => changeTheme()}
-                    />
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Vs AI" onPress={() => navigateWithSound("VsAI")} titleStyle={styles.buttonText}
                     />

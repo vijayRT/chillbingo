@@ -3,7 +3,7 @@ import { Image, View, Text } from 'react-native'
 import Theme ,{ createStyle } from 'react-native-theming';
 import Swiper from 'react-native-swiper'
 import { useThemeStore } from '../../store/Themes'
-import { ThemedButton, ThemedOverlay } from '../ThemedComponents'
+import { ThemedButton, ThemedOverlay,ThemedIcon } from '../ThemedComponents'
 import { usePlayerStore } from '../../store/player'
 
 export default function ThemeCarousel() {
@@ -44,20 +44,20 @@ export default function ThemeCarousel() {
   function nextArrow() {
     return (
       <View style={styles.arrowContainer}>
-        <Image source={require('../../../assets/rightarrow.png')} style={styles.arrow} />
+          <ThemedIcon size= {50} iconStyle={styles.arrowIcon} name='chevron-right'/>
       </View>
     )
   }
   function previousArrow() {
     return (
       <View style={styles.arrowContainer}>
-        <Image source={require('../../../assets/leftarrow.png')} style={styles.arrow} />
+         <ThemedIcon size= {50} iconStyle={styles.arrowIcon} name='chevron-left'/>
       </View>
     )
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.carouselContainer}>
         <Swiper
           showsButtons={true}
@@ -96,9 +96,16 @@ export default function ThemeCarousel() {
   )
 }
 const styles = createStyle({
-  carousel: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  container:{
+    flex:1,
+    flexDirection:'column',
+    justifyContent:'center',
+  },
+  carouselContainer: {
+    flex: 5,
+    // alignItems: 'center',
+    justifyContent: 'center'
+
   },
   carouselImage: {
     width: 250,
@@ -107,17 +114,10 @@ const styles = createStyle({
     borderColor: 'black',
     borderRadius: 20,
   },
-  logo: {
-    fontSize: 30,
-    fontFamily: 'cherryblossom',
-    zIndex: 2
-  },
   imageContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
-
-
   },
   arrow: {
     width: 40,
@@ -139,12 +139,7 @@ const styles = createStyle({
     fontSize: 18,
     fontFamily: '@fontFamily'
   },
-  carouselContainer: {
-    flex: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
 
-  },
   overlayStyle:
   {
 
@@ -163,6 +158,9 @@ const styles = createStyle({
     fontSize: 20,
     fontFamily: '@fontFamily'
 
+  },
+  arrowIcon:{
+    color:'@overlayTextColor'
   }
 
 
