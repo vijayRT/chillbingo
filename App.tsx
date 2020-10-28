@@ -5,9 +5,7 @@ import { usePlayerStore } from './src/store/player';
 import { StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Buffer } from "buffer";
-
-
-import Settings from './src/screens/Settings';
+import ProfileScreen from './src/screens/ProfileScreen';
 import MainMenu from './src/screens/MainMenu';
 import GameScreen from './src/screens/GameScreen';
 import AvatarScreen from './src/screens/ShopScreen';
@@ -28,8 +26,8 @@ export default function App() {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name="Settings"
-                    component={Settings}
+                    name="ProfileScreen"
+                    component={ProfileScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen

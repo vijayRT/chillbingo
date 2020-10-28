@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Image, Overlay, Text, Input } from 'react-native-elements'
-import { StyleSheet, View, Clipboard, TextInput } from 'react-native'
+import { Button,  Overlay, Text, Input } from 'react-native-elements'
+import { StyleSheet, View, Clipboard, TextInput, Image} from 'react-native'
 import { MainMenuScreenProps } from "../../../types"
+import Theme, { createStyle } from 'react-native-theming';
+import { ThemedButton, ThemedOverlay } from '../ThemedComponents'
+
 
 
 export default function JoinRoomOverlay({ onBackdropPress }) {
@@ -15,33 +18,17 @@ export default function JoinRoomOverlay({ onBackdropPress }) {
     // }
 
     return (
-        <Overlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={onBackdropPress}>
+        <ThemedOverlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={onBackdropPress}>
             <View style={styles.overlayContainer}>
                 <View style={styles.overlayHeading}>
-                    <Text style={styles.JoinRoomText}>Join Room</Text>
+                    <Theme.Text style={styles.JoinRoomText}>Join Room</Theme.Text>
                 </View>
 
                 <View style={styles.overlayProfile} >
                     <View style={styles.overlayProfileAndText}>
                         <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>Shadow</Text>
+                        <Theme.Text style={styles.overlayProfileText}>Shadow</Theme.Text>
                     </View>
-
-                    <View style={styles.overlayProfileAndText}>
-                        <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>Kyoma</Text>
-                    </View>
-
-                    <View style={styles.overlayProfileAndText}>
-                        <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>KronosFear</Text>
-                    </View>
-
-                    <View style={styles.overlayProfileAndText}>
-                        <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
-                        <Text style={styles.overlayProfileText}>OppaiLover</Text>
-                    </View>
-
                 </View>
 
                 {/* Join Link Here */}
@@ -64,21 +51,20 @@ export default function JoinRoomOverlay({ onBackdropPress }) {
 
                     {/* Start Game Button */}
                     <View style={styles.bottomContainer}>
-                    <View style={styles.startContainer}>
-                        <Button buttonStyle={styles.startButton}
-                        disabled
-                            title="Start Game" titleStyle={styles.startButtonText} />
+                   < View style={styles.waitingContainer}>
+                        <Theme.Text style={styles.waitingText}>Waiting for host to start . . .</Theme.Text>
                     </View>
                     <View style={styles.leaveContainer}>
-                        <Button buttonStyle={styles.leaveButton}
+                    
+                        <ThemedButton buttonStyle={styles.leaveButton}
                             title="Leave Game" titleStyle={styles.leaveButtonText} />
                     </View>
                     </View>
                 </View>
-            </Overlay>
+            </ThemedOverlay>
     );
 }
-const styles = StyleSheet.create({
+const styles = createStyle({
                 overlayContainer: {
                 flex: 1,
     },
@@ -89,13 +75,16 @@ const styles = StyleSheet.create({
     },
     overlayStyle:
             {
-                backgroundColor: 'rgba(52, 52, 52, 0.9)',
-        height: "70%",
+                backgroundColor: '@overlayColor',
+        height: "85%",
         width: "80%",
         borderRadius: 30,
+        borderColor:'white',
+        borderWidth:2
     },
     overlayHeading: {
                 flex: 1,
+                justifyContent: 'center',
     },
     overlayProfile: {
                 flex: 3,
@@ -112,15 +101,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         fontSize: 22,
+        fontFamily:'@fontFamily'
 
     },
 
     JoinRoomText:
             {
-                color: 'white',
+                color: '@overlayTextColor',
         marginTop: 10,
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 26,
+        fontFamily: '@fontFamily'
     },
     JoinLink: {
                 flex: 1,
@@ -148,34 +139,36 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         //alignContent:'center',
     },
-    startContainer: {
+    waitingContainer: {
         flex: 1,
         //alignItems: 'center',
 },
-    startButton: {
-                backgroundColor: 'blue',
-        borderRadius: 50,
-        width: 250,
-        //height: 50,
-
+    waitingText: {
+        color: '@overlayTextColor',
+        marginTop: 10,
+        // textAlign: 'center',
+        fontSize: 16,
+        fontFamily: '@fontFamily'
     },
     startButtonText: {
                 fontSize: 18,
-        color: 'white',
+                fontFamily:'@fontFamily',
+                color: '@textColor',
     },
     leaveContainer: {
         flex: 1,
         //alignItems: 'center',
 },
     leaveButton: {
-        backgroundColor: 'blue',
-borderRadius: 50,
-width: 120,
+    backgroundColor: '@backgroundColor',
+borderRadius: 10,
+width: 140,
 //height: 50,
 
 },
 leaveButtonText: {
         fontSize: 18,
-color: 'white',
+color: '@textColor',
+fontFamily:'@fontFamily'
 },
 });

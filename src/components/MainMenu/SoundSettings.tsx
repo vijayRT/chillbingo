@@ -3,6 +3,8 @@ import { Button, Overlay, Image } from 'react-native-elements';
 import Slider from '@react-native-community/slider';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { SettingsScreenProps } from "../../types"
+import { ThemedButton } from '../components/ThemedComponents'
+import Theme, { createStyle } from 'react-native-theming';
 
 export default function Settings({navigation}: SettingsScreenProps) {
     const [visible, setVisible] = useState(false);
@@ -11,7 +13,7 @@ export default function Settings({navigation}: SettingsScreenProps) {
     };
 
     return (
-        <ImageBackground source={require('../../assets/galaxy.jpg')} style={styles.imageBackground}>
+        <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
             <View style={styles.topContainer}>
                     <Image source={require('../../assets/gears_white.png')} style={styles.backImage} onPress={() => navigation.navigate('MainMenu')}/>
                 </View>
@@ -48,11 +50,11 @@ export default function Settings({navigation}: SettingsScreenProps) {
                     <Text style={styles.overlayText}>This App was Created by Yorozuya Games by Kronosfear, Kyoma and ShadowGear in the DiningRoom</Text>
                 </Overlay>
             </View>
-        </ImageBackground>
+        </Theme.ImageBackground>
     );
 };
 
-const styles = StyleSheet.create({
+const styles =createStyle({
     container: {
         flex: 1,
     },

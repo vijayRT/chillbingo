@@ -37,6 +37,7 @@
 		07A78B486B3748189D96817F /* Neon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02ACFFC7B1914C32BDFA4A84 /* Neon.ttf */; };
 		51C9BF969B064E9A95468FC4 /* NeonDisco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 418B179D477F480E88658A4E /* NeonDisco.ttf */; };
 		7E44CF66787B496C8C77D1F2 /* NeonFuture.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15744138B5724F97B6C6DADE /* NeonFuture.ttf */; };
+		54866B4F59EB4BB5B8F04210 /* AnnieUseYourTelescope.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC33CAFAAD664801B60C1390 /* AnnieUseYourTelescope.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		02ACFFC7B1914C32BDFA4A84 /* Neon.ttf */ = {isa = PBXFileReference; name = "Neon.ttf"; path = "../assets/fonts/Neon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		418B179D477F480E88658A4E /* NeonDisco.ttf */ = {isa = PBXFileReference; name = "NeonDisco.ttf"; path = "../assets/fonts/NeonDisco.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		15744138B5724F97B6C6DADE /* NeonFuture.ttf */ = {isa = PBXFileReference; name = "NeonFuture.ttf"; path = "../assets/fonts/NeonFuture.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC33CAFAAD664801B60C1390 /* AnnieUseYourTelescope.ttf */ = {isa = PBXFileReference; name = "AnnieUseYourTelescope.ttf"; path = "../assets/fonts/AnnieUseYourTelescope.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				02ACFFC7B1914C32BDFA4A84 /* Neon.ttf */,
 				418B179D477F480E88658A4E /* NeonDisco.ttf */,
 				15744138B5724F97B6C6DADE /* NeonFuture.ttf */,
+				CC33CAFAAD664801B60C1390 /* AnnieUseYourTelescope.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				07A78B486B3748189D96817F /* Neon.ttf in Resources */,
 				51C9BF969B064E9A95468FC4 /* NeonDisco.ttf in Resources */,
 				7E44CF66787B496C8C77D1F2 /* NeonFuture.ttf in Resources */,
+				54866B4F59EB4BB5B8F04210 /* AnnieUseYourTelescope.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
