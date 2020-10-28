@@ -19,3 +19,8 @@ export type AvatarScreenProps = StackScreenProps<
   RootStackParamList,
   'AvatarScreen'
 >;
+
+export type PlayerProfileProps = {
+    name: string,
+    avatar: string
+}

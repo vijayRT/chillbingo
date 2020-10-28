@@ -8,6 +8,7 @@ import { useThemeStore } from '../store/Themes'
 import { ThemedButton } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
 import { useSoundStore } from '../store/sounds'
+import { useRoomStore } from '../store/room';
 
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
@@ -18,6 +19,8 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
         state => state.activeTheme
     ), [])
     const buttonPress = useSoundStore(state => state.buttonPress)
+    const createRoom = useRoomStore((state) => state.createRoom)
+    
     const changeTheme = () => {
         setActiveTheme('sakura')
         activeThemeRef.current.apply()
@@ -28,9 +31,10 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
         navigation.navigate(buttonName)
     }
     const [createRoomVisible, setCreateRoomVisible] = useState(false);
-    const toggleCreateRoomOverlay = () => {
+    const toggleCreateRoomOverlay = async () => {
         buttonPress.play();
         console.log("pressed toggle")
+        await createRoom()
         setCreateRoomVisible(!createRoomVisible);
     };
 

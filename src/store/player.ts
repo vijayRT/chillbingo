@@ -3,6 +3,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-community/async-storage'
 import create from 'zustand'
 import { configurePersist } from 'zustand-persist'
+import axios from 'axios'
 
 GoogleSignin.configure({
     scopes: ['profile', 'email'],
@@ -17,10 +18,10 @@ const { persist, purge } = configurePersist({
 export const usePlayerStore = create(
     persist({
         key: 'auth', // required, child key of storage
-        allowlist: ['isAuthenticated', 'user'], // optional, will save everything if allowlist is undefined
+        allowlist: ['isAuthenticated', 'user', 'email'], // optional, will save everything if allowlist is undefined
         denylist: [], // optional, if allowlist set, denylist will be ignored
     }, (set) => ({
-        idToken: undefined,
+        email: undefined,
         isAuthenticating: false,
         isAuthenticated: false,
         user: undefined,
@@ -28,12 +29,15 @@ export const usePlayerStore = create(
             set((state) => ({ isAuthenticating: true }))
             const { idToken } = await GoogleSignin.signIn();
             const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-            const user = auth().signInWithCredential(googleCredential);
+            const userCredentialSignIn = await auth().signInWithCredential(googleCredential)
+            const email = userCredentialSignIn.user.email
+            const userFromFireStore = await axios.post('http://192.168.0.4:2567/signin', {email})
+            console.log(userFromFireStore.data)
             set((state) => ({
                 isAuthenticated: true,
                 isAuthenticating: false,
-                idToken,
-                user
+                email,
+                user: userFromFireStore.data
             }))
         }
     })
