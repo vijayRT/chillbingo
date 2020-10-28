@@ -9,6 +9,7 @@ interface Player {
 }
 export default function RoomPlayerProfile({name, avatar}: PlayerProfileProps) {
     return (
+        
         <View style={styles.overlayProfileAndText}>
             <Image source={require('../../../assets/person.png')} style={styles.profileImage} />
             <Theme.Text style={styles.overlayProfileText}>{name}</Theme.Text>
@@ -17,6 +18,7 @@ export default function RoomPlayerProfile({name, avatar}: PlayerProfileProps) {
 }
 
 const styles = createStyle({
+
     overlayProfileAndText: {
         flexDirection: "row",
     },

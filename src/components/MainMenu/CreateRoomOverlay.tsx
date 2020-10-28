@@ -44,9 +44,11 @@ export default function CreateRoomOverlay({
                         Create Room
                     </Theme.Text>
                 </View>
+                <View style={styles.overlayProfile}>
                 {players.map((player) => {
                     return renderPlayerProfile(player)
                 })}
+                </View>
                 {/* Create Link Here */}
                 <View style={styles.createLink}>
                     <View style={styles.createLinkText}>
@@ -92,6 +94,7 @@ const styles = createStyle({
         justifyContent: 'space-evenly',
         marginLeft: 20,
     },
+    
 
     createRoomText: {
         color: '@overlayTextColor',
@@ -132,7 +135,7 @@ const styles = createStyle({
     },
     startButtonText: {
         fontSize: 18,
-        color: 'white',
+        color: '@textColor',
         fontFamily: '@fontFamily',
     },
 })
