@@ -5,14 +5,17 @@ import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import { ProfileScreenProps } from "../../types"
 import { ThemedButton, ThemedOverlay } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
+import { usePlayerStore } from '../store/player'
 
 export default function ProfileScreen({navigation}: ProfileScreenProps) {
+    const playerDetails = usePlayerStore(state => state.user)
     const [visible, setVisible] = useState(false);
     const toggleOverlay = () => {
         setVisible(!visible);
     };
-
+    console.log('inside profile screen:',playerDetails)
     return (
+        
         <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
             
             <View style={styles.avatarContainer}>
@@ -20,10 +23,10 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
                 </View>
                 <View style={styles.playerNameContainer1}>
                 <View style={styles.playerNameContainer2}>
-                    <Theme.Text style={styles.playerName}>Hokyoma</Theme.Text>
+    <Theme.Text style={styles.playerName}>{playerDetails.name}</Theme.Text>
                     </View>
                     <View style={styles.coinContainer}>
-                    <Theme.Text style={styles.coins}>6969 Coins</Theme.Text>
+                    <Theme.Text style={styles.coins}>{playerDetails.coins} Coins</Theme.Text>
                     
                     </View>
                 </View>
@@ -44,9 +47,9 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
                     <Theme.Text style={styles.playerDetails}>:</Theme.Text>
                     </View>
                     <View style={styles.rightDetails}>
-                    <Theme.Text style={styles.playerDetails}>10</Theme.Text>
-                    <Theme.Text style={styles.playerDetails}>10</Theme.Text>
-                    <Theme.Text style={styles.playerDetails}>20</Theme.Text>
+    <Theme.Text style={styles.playerDetails}>{playerDetails.gameWins}</Theme.Text>
+                    <Theme.Text style={styles.playerDetails}>{playerDetails.gameLosses}</Theme.Text>
+                    <Theme.Text style={styles.playerDetails}>{playerDetails.gamesPlayed}</Theme.Text>
                     <Theme.Text style={styles.playerDetails}>Neon City</Theme.Text>
                     </View>
                 </View>

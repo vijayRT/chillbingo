@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, Image } from 'react-native';
 import { AvatarScreenProps } from "../../types"
 import Theme, { createStyle } from 'react-native-theming';
 import { ThemedButton } from '../components/ThemedComponents'
-import ThemeCarousel from '../components/ThemeScreen/ThemeCarousel'
+import ThemeCarousel from '../components/ShopScreen/ThemeCarousel'
+import { useThemeStore } from '../store/Themes'
 
 
 export default function AvatarScreen({ navigation }: AvatarScreenProps) {
+    
+    const setActiveTheme = useThemeStore(state => state.setActiveTheme)
+    const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
+    useEffect(() => useThemeStore.subscribe(
+        activeTheme => (activeThemeRef.current = activeTheme),
+        state => state.activeTheme
+    ), [])
+
 
     return (
         <Theme.ImageBackground source='@backgroundImage' style={styles.imageBackground}>
@@ -30,16 +39,6 @@ export default function AvatarScreen({ navigation }: AvatarScreenProps) {
 
                 <View style={styles.carouselContainer}>
                     <ThemeCarousel />
-                </View>
-
-                <View style={styles.menuContainer}>
-                    <ThemedButton buttonStyle={styles.button}
-                        title="Purchase" titleStyle={styles.buttonText}
-                    />
-
-                    <ThemedButton buttonStyle={styles.button}
-                        title="Equip" titleStyle={styles.buttonText}
-                    />
                 </View>
 
             </View>
