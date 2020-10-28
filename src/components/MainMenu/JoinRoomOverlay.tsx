@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Button, Image, Overlay, Text, Input } from 'react-native-elements'
 import { StyleSheet, View, Clipboard, TextInput } from 'react-native'
 import { MainMenuScreenProps } from "../../../types"
+import Theme, { createStyle } from 'react-native-theming';
+import { ThemedButton, ThemedOverlay } from '../ThemedComponents'
 
 
 export default function JoinRoomOverlay({ onBackdropPress }) {
@@ -15,10 +17,10 @@ export default function JoinRoomOverlay({ onBackdropPress }) {
     // }
 
     return (
-        <Overlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={onBackdropPress}>
+        <ThemedOverlay isVisible={true} overlayStyle={styles.overlayStyle} onBackdropPress={onBackdropPress}>
             <View style={styles.overlayContainer}>
                 <View style={styles.overlayHeading}>
-                    <Text style={styles.JoinRoomText}>Join Room</Text>
+                    <Theme.Text style={styles.JoinRoomText}>Join Room</Theme.Text>
                 </View>
 
                 <View style={styles.overlayProfile} >
@@ -75,10 +77,10 @@ export default function JoinRoomOverlay({ onBackdropPress }) {
                     </View>
                     </View>
                 </View>
-            </Overlay>
+            </ThemedOverlay>
     );
 }
-const styles = StyleSheet.create({
+const styles = createStyle({
                 overlayContainer: {
                 flex: 1,
     },
@@ -89,10 +91,12 @@ const styles = StyleSheet.create({
     },
     overlayStyle:
             {
-                backgroundColor: 'rgba(52, 52, 52, 0.9)',
-        height: "70%",
+                backgroundColor: '@overlayColor',
+        height: "85%",
         width: "80%",
         borderRadius: 30,
+        borderColor:'white',
+        borderWidth:2
     },
     overlayHeading: {
                 flex: 1,
@@ -117,10 +121,11 @@ const styles = StyleSheet.create({
 
     JoinRoomText:
             {
-                color: 'white',
+                color: '@overlayTextColor',
         marginTop: 10,
         textAlign: 'center',
         fontSize: 22,
+        fontFamily: '@fontFamily'
     },
     JoinLink: {
                 flex: 1,
