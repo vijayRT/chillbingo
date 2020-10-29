@@ -8,7 +8,7 @@ type colysesusClientStore = {
 export const useColyseusClientStore = create<colysesusClientStore>(set => ({
     client: undefined,
     initialize: () : void => {
-        const client = new Colyseus.Client('ws://192.168.0.13:2567')
+        const client = new Colyseus.Client(process.env.GAME_SERVER_URL)
         set({client})
     }
 })

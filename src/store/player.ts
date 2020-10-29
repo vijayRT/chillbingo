@@ -31,7 +31,7 @@ export const usePlayerStore = create(
             const googleCredential = auth.GoogleAuthProvider.credential(idToken);
             const userCredentialSignIn = await auth().signInWithCredential(googleCredential)
             const email = userCredentialSignIn.user.email
-            const userFromFireStore = await axios.post('http://192.168.0.13:2567/signin', {email})
+            const userFromFireStore = await axios.post(`${process.env.API_URL}/signin`, {email})
             console.log(userFromFireStore.data)
             set((state) => ({
                 isAuthenticated: true,
