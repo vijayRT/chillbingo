@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, {useEffect, useRef, useState } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
 import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
@@ -7,18 +7,32 @@ import { ThemedButton,ThemedIcon } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
 import { useSoundStore } from '../store/sounds'
 import { useRoomStore } from '../store/room';
+import { useThemeStore } from '../store/Themes';
 
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
+
+    const setActiveTheme = useThemeStore(state => state.setActiveTheme)
+    const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
+    useEffect(() => useThemeStore.subscribe(
+        activeTheme => (activeThemeRef.current = activeTheme),
+        state => state.activeTheme
+    ), [])
+    const changeTheme = () => {
+        setActiveTheme('sakura')
+        activeThemeRef.current.apply()
+
+    }
+
     const buttonPress = useSoundStore(state => state.buttonPress)
     const createRoom = useRoomStore((state) => state.createRoom)
-    
     function navigateWithSound(buttonName) {
         buttonPress.play();
         navigation.navigate(buttonName)
     }
+
     const [createRoomVisible, setCreateRoomVisible] = useState(false);
-    const toggleCreateRoomOverlay = async () => {
+    const createRoomHandler = async () => {
         buttonPress.play();
         console.log("pressed toggle")
         await createRoom()
@@ -35,7 +49,7 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
     const renderCreateRoomOverlay = () => {
         if (createRoomVisible) {
             return (
-                <CreateRoomOverlay toggleCreateRoomOverlay={toggleCreateRoomOverlay} navigation={navigation} />
+                <CreateRoomOverlay overlayVisible={createRoomVisible} setOverlayVisible={setCreateRoomVisible} navigation={navigation} />
             )
         }
     }
@@ -74,7 +88,7 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
                         title="Join Room" onPress={toggleJoinRoomOverlay} titleStyle={styles.buttonText} />
 
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Create Room" onPress={toggleCreateRoomOverlay} titleStyle={styles.buttonText}
+                        title="Create Room" onPress={createRoomHandler} titleStyle={styles.buttonText}
                     />
                     <>{renderCreateRoomOverlay()}</>
                     <>{renderJoinRoomOverlay()}</>

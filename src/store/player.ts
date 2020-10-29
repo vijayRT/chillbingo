@@ -18,7 +18,7 @@ const { persist, purge } = configurePersist({
 export const usePlayerStore = create(
     persist({
         key: 'auth', // required, child key of storage
-        allowlist: ['isAuthenticated', 'user', 'email'], // optional, will save everything if allowlist is undefined
+        allowlist: ['isAuthenticated', 'email'], // optional, will save everything if allowlist is undefined
         denylist: [], // optional, if allowlist set, denylist will be ignored
     }, (set) => ({
         email: undefined,

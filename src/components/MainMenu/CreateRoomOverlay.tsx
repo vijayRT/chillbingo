@@ -3,40 +3,38 @@ import React, {useEffect, useState} from 'react'
 import {Button, Overlay, Text, Input} from 'react-native-elements'
 import {StyleSheet, View, Clipboard, TextInput, Image} from 'react-native'
 import Theme, {createStyle} from 'react-native-theming'
-import {GameScreenProps, PlayerProfileProps} from '../../../types'
+import {GameScreenProps, overlayProps, PlayerProfileProps} from '../../../types'
 import {useColyseusClientStore} from '../../store/colyseus'
 import {useRoomStore} from '../../store/room'
 import RoomPlayerProfile from './RoomPlayerProfile'
 
-export default function CreateRoomOverlay({
-    toggleCreateRoomOverlay,
-    navigation,
-}: GameScreenProps) {
+export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, navigation}: overlayProps) {
     const [copiedText, setCopiedText] = useState('')
+
     const room = useRoomStore((state) => state.room)
     const playerJoin = useRoomStore((state) => state.playerJoin)
+    const playerLeave = useRoomStore(state => state.playerLeave)
     const players = useRoomStore((state) => state.players)
     useEffect(() => {
         room?.onMessage('playerJoined', (message) => playerJoin(message))
     }, [room])
-    const fetchCopiedText = async () => {
-        const text = await Clipboard.getString()
-        setCopiedText(text)
-    }
-    const createRoomHandler = async () => {
-    }
+
     const startGame = () => {
-        toggleCreateRoomOverlay()
+        setOverlayVisible(false)
         navigation.navigate('GameScreen')
     }
+    const leaveGame = () => {
+        playerLeave()
+        setOverlayVisible(false)
+    }
+
     const renderPlayerProfile = (player: PlayerProfileProps) => {
         return <RoomPlayerProfile name={player.name} avatar={player.avatar} />
     }
     return (
         <ThemedOverlay
-            isVisible={true}
+            isVisible={overlayVisible}
             overlayStyle={styles.overlayStyle}
-            onBackdropPress={toggleCreateRoomOverlay}
         >
             <Theme.View style={styles.overlayContainer}>
                 <View style={styles.overlayHeading}>
@@ -58,13 +56,21 @@ export default function CreateRoomOverlay({
                     </View>
                 </View>
                 {/* Start Game Button */}
-                <View style={styles.startContainer}>
+                <View style={styles.startAndLeaveButtonContainer}>
                     <ThemedButton
                         buttonStyle={styles.startButton}
                         title="Start Game"
                         titleStyle={styles.startButtonText}
                         onPress={() => {
                             startGame()
+                        }}
+                    />
+                    <ThemedButton
+                        buttonStyle={styles.leaveRoomButton}
+                        title="Leave Game"
+                        titleStyle={styles.startButtonText}
+                        onPress={() => {
+                            leaveGame()
                         }}
                     />
                 </View>
@@ -94,8 +100,6 @@ const styles = createStyle({
         justifyContent: 'space-evenly',
         marginLeft: 20,
     },
-    
-
     createRoomText: {
         color: '@overlayTextColor',
         marginTop: 10,
@@ -122,10 +126,10 @@ const styles = createStyle({
         color: 'white',
     },
 
-    startContainer: {
+    startAndLeaveButtonContainer: {
         flex: 1,
-        alignItems: 'center',
-        //alignContent:'center',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     startButton: {
         backgroundColor: '@backgroundColor',
@@ -138,4 +142,10 @@ const styles = createStyle({
         color: '@textColor',
         fontFamily: '@fontFamily',
     },
+    leaveRoomButton: {
+        backgroundColor: '@backgroundColor',
+        borderRadius: 10,
+        width: 100,
+        height: 30,
+    }
 })
