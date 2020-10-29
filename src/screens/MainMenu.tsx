@@ -12,26 +12,28 @@ import { useRoomStore } from '../store/room';
 
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
+
     const setActiveTheme = useThemeStore(state => state.setActiveTheme)
     const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
     useEffect(() => useThemeStore.subscribe(
         activeTheme => (activeThemeRef.current = activeTheme),
         state => state.activeTheme
     ), [])
-    const buttonPress = useSoundStore(state => state.buttonPress)
-    const createRoom = useRoomStore((state) => state.createRoom)
-    
     const changeTheme = () => {
         setActiveTheme('sakura')
         activeThemeRef.current.apply()
 
     }
+
+    const buttonPress = useSoundStore(state => state.buttonPress)
+    const createRoom = useRoomStore((state) => state.createRoom)
     function navigateWithSound(buttonName) {
         buttonPress.play();
         navigation.navigate(buttonName)
     }
+
     const [createRoomVisible, setCreateRoomVisible] = useState(false);
-    const toggleCreateRoomOverlay = async () => {
+    const createRoomHandler = async () => {
         buttonPress.play();
         console.log("pressed toggle")
         await createRoom()
@@ -48,7 +50,7 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
     const renderCreateRoomOverlay = () => {
         if (createRoomVisible) {
             return (
-                <CreateRoomOverlay toggleCreateRoomOverlay={toggleCreateRoomOverlay} navigation={navigation} />
+                <CreateRoomOverlay overlayVisible={createRoomVisible} setOverlayVisible={setCreateRoomVisible} navigation={navigation} />
             )
         }
     }
@@ -90,7 +92,7 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
                         title="Join Room" onPress={toggleJoinRoomOverlay} titleStyle={styles.buttonText} />
 
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Create Room" onPress={toggleCreateRoomOverlay} titleStyle={styles.buttonText}
+                        title="Create Room" onPress={createRoomHandler} titleStyle={styles.buttonText}
                     />
                     <>{renderCreateRoomOverlay()}</>
                     <>{renderJoinRoomOverlay()}</>
