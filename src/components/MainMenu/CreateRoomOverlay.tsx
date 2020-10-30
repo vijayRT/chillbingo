@@ -10,7 +10,7 @@ import RoomPlayerProfile from './RoomPlayerProfile'
 
 export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, navigation}: overlayProps) {
     const [copiedText, setCopiedText] = useState('')
-    const [players, setPlayers] = useState([] as PlayerProfileProps[])
+    const [players, setPlayers] = useState(room?.state.players)
     const room = useRoomStore((state) => state.room)
     const playerLeave = useRoomStore(state => state.playerLeave)
     useEffect(() => {
