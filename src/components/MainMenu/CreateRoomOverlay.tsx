@@ -10,13 +10,13 @@ import RoomPlayerProfile from './RoomPlayerProfile'
 
 export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, navigation}: overlayProps) {
     const [copiedText, setCopiedText] = useState('')
-
+    const [players, setPlayers] = useState([] as PlayerProfileProps[])
     const room = useRoomStore((state) => state.room)
-    const playerJoin = useRoomStore((state) => state.playerJoin)
     const playerLeave = useRoomStore(state => state.playerLeave)
-    const players = useRoomStore((state) => state.players)
     useEffect(() => {
-        room?.onMessage('playerJoined', (message) => playerJoin(message))
+        room.state.players.onAdd = (player, key) => {
+            setPlayers([...players, player])
+        }
     }, [room])
 
     const startGame = () => {

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import create from 'zustand'
 import { configurePersist } from 'zustand-persist'
 import axios from 'axios'
+import {API_URL} from '@env'
 
 GoogleSignin.configure({
     scopes: ['profile', 'email'],
@@ -31,7 +32,8 @@ export const usePlayerStore = create(
             const googleCredential = auth.GoogleAuthProvider.credential(idToken);
             const userCredentialSignIn = await auth().signInWithCredential(googleCredential)
             const email = userCredentialSignIn.user.email
-            const userFromFireStore = await axios.post(`${process.env.API_URL}/signin`, {email})
+            console.log(API_URL)
+            const userFromFireStore = await axios.post(`${API_URL}/users`, {email})
             console.log(userFromFireStore.data)
             set((state) => ({
                 isAuthenticated: true,

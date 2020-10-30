@@ -20,7 +20,7 @@ export type AvatarScreenProps = StackScreenProps<
     'AvatarScreen'
 >
 
-export type PlayerProfileProps = {
+export interface PlayerProfileProps {
     name: string
     avatar: string
 }
