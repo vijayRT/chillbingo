@@ -3,13 +3,14 @@ import create from 'zustand'
 import {PlayerProfileProps} from '../../types'
 import {useColyseusClientStore} from './colyseus'
 import {usePlayerStore} from './player'
-
+import {Reflection} from '@colyseus/schema'
+import { BingoRoomState } from '../schema/BingoRoomState'
 interface PlayerData {
     name: string
     avatar: string
 }
 type RoomStore = {
-    room?: Room
+    room?: Room<BingoRoomState>
     sessionId?: string
     createRoom: () => Promise<void>
     playerLeave: () => void
@@ -22,17 +23,16 @@ export const useRoomStore = create<RoomStore>((set, get) => ({
         initializeColyseusClient()
         const email = usePlayerStore.getState().email
         const client = useColyseusClientStore.getState().client
-        const room = await client?.create('bingo_room', {email})
-        set({room, sessionId: room?.sessionId, players: room.state.players})
+        if (client) {
+            const room: Room<BingoRoomState> = await client?.create('bingo_room', {email})
+            set({room, sessionId: room?.sessionId})
+        }
     },
     playerLeave: () => {
         get().room?.leave()
         set({
             room: undefined,
-            sessionId: undefined,
-            players: [],
-            pressedNumbers: [],
-            board: [],
+            sessionId: undefined
         })
     },
 }))

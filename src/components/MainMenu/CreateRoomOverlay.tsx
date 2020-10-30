@@ -7,15 +7,16 @@ import {GameScreenProps, overlayProps, PlayerProfileProps} from '../../../types'
 import {useColyseusClientStore} from '../../store/colyseus'
 import {useRoomStore} from '../../store/room'
 import RoomPlayerProfile from './RoomPlayerProfile'
+import { Player } from '../../schema/Player'
 
 export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, navigation}: overlayProps) {
     const [copiedText, setCopiedText] = useState('')
     const room = useRoomStore((state) => state.room)
-    const [players, setPlayers] = useState(room?.state.players)
+    const [playerProfiles, setPlayerProfile] = useState([] as JSX.Element[])
     const playerLeave = useRoomStore(state => state.playerLeave)
     useEffect(() => {
         room.state.players.onAdd = (player, key) => {
-            setPlayers([...players, player])
+            setPlayerProfile([...playerProfiles, <RoomPlayerProfile name={player.name} avatar={player.avatar} />])
         }
     }, [room])
 
@@ -26,10 +27,6 @@ export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, na
     const leaveGame = () => {
         playerLeave()
         setOverlayVisible(false)
-    }
-
-    const renderPlayerProfile = (player: PlayerProfileProps) => {
-        return <RoomPlayerProfile name={player.name} avatar={player.avatar} />
     }
     return (
         <ThemedOverlay
@@ -43,9 +40,7 @@ export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, na
                     </Theme.Text>
                 </View>
                 <View style={styles.overlayProfile}>
-                {players.map((player) => {
-                    return renderPlayerProfile(player)
-                })}
+                {playerProfiles}
                 </View>
                 {/* Create Link Here */}
                 <View style={styles.createLink}>

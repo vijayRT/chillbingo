@@ -733,7 +733,7 @@
   resolved "https://registry.yarnpkg.com/@colyseus/http/-/http-2.0.0.tgz#620209a3dd06f9c455de12128d22ebdffda05592"
   integrity sha512-GLg13402o160vBcjcO5uupVzf8FLAFtMQKvi7QdfxG2OvPFHx+s6wws5CAWOvcyqA97aR4Xzqxngp8AEX7ndNA==
 
-"@colyseus/schema@^1.0.0":
+"@colyseus/schema@^1.0.0", "@colyseus/schema@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@colyseus/schema/-/schema-1.0.1.tgz#cf554370597372366cbc06e4544e609e9e421052"
   integrity sha512-P5+PZ9zBEe+Ykw5W8Eo01BeWLQOziaM4lRTpS40R6/o+zH4gmOPzMaWhQlVoVHw0GEAqOfwUtbk9u7qPFbwtyQ==
