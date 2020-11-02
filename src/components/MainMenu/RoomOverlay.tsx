@@ -1,24 +1,52 @@
 import {ThemedButton, ThemedOverlay} from '../ThemedComponents'
 import React, {useEffect, useState} from 'react'
-import {Button, Overlay, Text, Input} from 'react-native-elements'
-import {StyleSheet, View, Clipboard, TextInput, Image} from 'react-native'
+import {View, TouchableOpacity, Clipboard} from 'react-native'
 import Theme, {createStyle} from 'react-native-theming'
-import {GameScreenProps, overlayProps, PlayerProfileProps} from '../../../types'
-import {useColyseusClientStore} from '../../store/colyseus'
+import {overlayProps} from '../../../types'
 import {useRoomStore} from '../../store/room'
 import RoomPlayerProfile from './RoomPlayerProfile'
+import Toast from 'react-native-simple-toast'
+import { useUserStore } from '../../store/user'
+import { Player } from '../../schema/Player'
 
-export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, navigation}: overlayProps) {
-    const [copiedText, setCopiedText] = useState('')
-    const [players, setPlayers] = useState([] as PlayerProfileProps[])
+export default function RoomOverlay({
+    overlayVisible,
+    mode,
+    setOverlayVisible,
+    navigation,
+}: overlayProps) {
     const room = useRoomStore((state) => state.room)
-    const playerLeave = useRoomStore(state => state.playerLeave)
+    const roomLink = useRoomStore((state) => state.roomLink)
+    const [playerProfileComponents, setPlayerProfileComponents] = useState(new Map<string, JSX.Element>())
+    const playerLeave = useRoomStore((state) => state.playerLeave)
     useEffect(() => {
+        room?.state.players.forEach((player) => {
+            setPlayerProfileComponents(new Map(playerProfileComponents.set(player.email, <RoomPlayerProfile name={player.name} avatar={player.avatar} />)))
+        })
         room.state.players.onAdd = (player, key) => {
-            setPlayers([...players, player])
+            setPlayerProfileComponents(new Map(playerProfileComponents.set(player.email, <RoomPlayerProfile name={player.name} avatar={player.avatar} />)))
         }
-    }, [room])
-
+        room.state.players.onRemove = (player, key) => {
+            console.log("Player Left")
+            playerProfileComponents.delete(player.email)
+            setPlayerProfileComponents(new Map(playerProfileComponents))
+        }
+    }, [])
+    const renderPlayerProfiles = () => {
+        const playerProfileDisplays = [] as JSX.Element[]
+        playerProfileComponents.forEach((playerProfileComponent) => {
+            playerProfileDisplays.push(playerProfileComponent)
+        })
+        return playerProfileDisplays
+    }
+    const copyRoomLinkToClipboard = () => {
+        if (roomLink) {
+            Clipboard.setString(roomLink)
+            Toast.show('Copied room link to clipboard!')
+        } else {
+            Toast.show("Couldn't copy room link")
+        }
+    }
     const startGame = () => {
         setOverlayVisible(false)
         navigation.navigate('GameScreen')
@@ -26,10 +54,6 @@ export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, na
     const leaveGame = () => {
         playerLeave()
         setOverlayVisible(false)
-    }
-
-    const renderPlayerProfile = (player: PlayerProfileProps) => {
-        return <RoomPlayerProfile name={player.name} avatar={player.avatar} />
     }
     return (
         <ThemedOverlay
@@ -39,24 +63,21 @@ export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, na
             <Theme.View style={styles.overlayContainer}>
                 <View style={styles.overlayHeading}>
                     <Theme.Text style={styles.createRoomText}>
-                        Create Room
+                        {mode === 'create' ? "Create Room" : "Join Room"}
                     </Theme.Text>
                 </View>
-                <View style={styles.overlayProfile}>
-                {players.map((player) => {
-                    return renderPlayerProfile(player)
-                })}
-                </View>
+                <View style={styles.overlayProfile}>{renderPlayerProfiles()}</View>
                 {/* Create Link Here */}
                 <View style={styles.createLink}>
-                    <View style={styles.createLinkText}>
-                        <Input>
-                            <Text onPress={() => fetchCopiedText()}>Hello</Text>
-                        </Input>
-                    </View>
+                    <TouchableOpacity onPress={() => copyRoomLinkToClipboard()}>
+                        <Theme.Text style={styles.createLinkText}>
+                            {roomLink}
+                        </Theme.Text>
+                    </TouchableOpacity>
                 </View>
                 {/* Start Game Button */}
                 <View style={styles.startAndLeaveButtonContainer}>
+                    {mode === 'create' ? 
                     <ThemedButton
                         buttonStyle={styles.startButton}
                         title="Start Game"
@@ -64,7 +85,10 @@ export default function CreateRoomOverlay({overlayVisible, setOverlayVisible, na
                         onPress={() => {
                             startGame()
                         }}
-                    />
+                    /> : <Theme.Text style={styles.waitingText}>
+                    Waiting for host to start . . .
+                </Theme.Text>}
+                    
                     <ThemedButton
                         buttonStyle={styles.leaveRoomButton}
                         title="Leave Game"
@@ -112,7 +136,7 @@ const styles = createStyle({
         flexDirection: 'row',
     },
     createLinkText: {
-        flex: 2,
+        color: '@textColor',
     },
     createLinkButton: {
         flex: 1,
@@ -129,7 +153,7 @@ const styles = createStyle({
     startAndLeaveButtonContainer: {
         flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     startButton: {
         backgroundColor: '@backgroundColor',
@@ -147,5 +171,12 @@ const styles = createStyle({
         borderRadius: 10,
         width: 100,
         height: 30,
+    },
+    waitingText: {
+        color: '@overlayTextColor',
+        marginTop: 10,
+        // textAlign: 'center',
+        fontSize: 16,
+        fontFamily: '@fontFamily',
     }
 })

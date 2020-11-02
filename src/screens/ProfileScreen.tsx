@@ -5,15 +5,14 @@ import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import { ProfileScreenProps } from "../../types"
 import { ThemedButton, ThemedOverlay } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
-import { usePlayerStore } from '../store/player'
+import { useUserStore } from '../store/user'
 
 export default function ProfileScreen({navigation}: ProfileScreenProps) {
-    const playerDetails = usePlayerStore(state => state.user)
+    const playerDetails = useUserStore(state => state.user)
     const [visible, setVisible] = useState(false);
     const toggleOverlay = () => {
         setVisible(!visible);
     };
-    console.log('inside profile screen:',playerDetails)
     return (
         
         <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
