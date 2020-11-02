@@ -4,11 +4,11 @@ import Theme ,{ createStyle } from 'react-native-theming';
 import Swiper from 'react-native-swiper'
 import { useThemeStore } from '../../store/Themes'
 import { ThemedButton, ThemedOverlay,ThemedIcon } from '../ThemedComponents'
-import { usePlayerStore } from '../../store/player'
+import { useUserStore } from '../../store/user'
 
 export default function ThemeCarousel() {
 
-  const playerDetails = usePlayerStore(state => state.user)
+  const playerDetails = useUserStore(state => state.user)
   let themeArray = ['neonCity', 'sakura', 'chumma']
   const [themeIndex, setThemeIndex] = useState(0);
   const [buttonName, setButtonName] = useState('Equip')

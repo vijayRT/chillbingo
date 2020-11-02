@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button, Image, StyleSheet, View } from 'react-native'
-import { usePlayerStore } from '../store/player';
+import { useUserStore } from '../store/user';
 import { GoogleSigninButton } from '@react-native-community/google-signin'
 import ThemeCarousel from '../components/ShopScreen/ThemeCarousel';
 import Theme, { createStyle } from 'react-native-theming';
 
 export default function Authentication() {
-    const login = usePlayerStore(state => state.login)
+    const login = useUserStore(state => state.login)
     return (
         <View style={styles.screen}>
             <Theme.ImageBackground
