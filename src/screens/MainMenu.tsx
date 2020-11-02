@@ -1,68 +1,62 @@
-import React, { useEffect, useRef, useState } from 'react'
-import {Icon} from 'react-native-elements'
+import React, {useEffect, useRef, useState } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { MainMenuScreenProps } from "../../types"
-import CreateRoomOverlay from '../components/MainMenu/CreateRoomOverlay';
-import JoinRoomOverlay from '../components/MainMenu/JoinRoomOverlay';
-import { useThemeStore } from '../store/Themes'
+import RoomOverlay from '../components/MainMenu/RoomOverlay';
 import { ThemedButton,ThemedIcon } from '../components/ThemedComponents'
 import Theme, { createStyle } from 'react-native-theming';
 import { useSoundStore } from '../store/sounds'
 import { useRoomStore } from '../store/room';
+import { useThemeStore } from '../store/Themes';
 
 
 export default function MainMenu({ navigation }: MainMenuScreenProps) {
-    const setActiveTheme = useThemeStore(state => state.setActiveTheme)
     const activeThemeRef = useRef(useThemeStore.getState().activeTheme)
     useEffect(() => useThemeStore.subscribe(
         activeTheme => (activeThemeRef.current = activeTheme),
         state => state.activeTheme
     ), [])
-    const buttonPress = useSoundStore(state => state.buttonPress)
-    const createRoom = useRoomStore((state) => state.createRoom)
-    
-    const changeTheme = () => {
-        setActiveTheme('sakura')
-        activeThemeRef.current.apply()
-
-    }
+    const joinedWithLink = useRoomStore(state => state.joinedWithLink)
+    const [joinRoomVisible, setJoinRoomVisible] = useState(false);
+    useEffect(() => {
+        if (joinedWithLink) {
+            setJoinRoomVisible(true)
+        }
+    }, [joinedWithLink])
     function navigateWithSound(buttonName) {
         buttonPress.play();
         navigation.navigate(buttonName)
     }
+    
+    const buttonPress = useSoundStore(state => state.buttonPress)
+    const createRoom = useRoomStore((state) => state.createRoom)
+    const buildRoomLink = useRoomStore((state) => state.buildRoomLink)
     const [createRoomVisible, setCreateRoomVisible] = useState(false);
-    const toggleCreateRoomOverlay = async () => {
+    const createRoomHandler = async () => {
         buttonPress.play();
-        console.log("pressed toggle")
         await createRoom()
+        await buildRoomLink()
         setCreateRoomVisible(!createRoomVisible);
     };
-
-    const [joinRoomVisible, setJoinRoomVisible] = useState(false);
     const toggleJoinRoomOverlay = () => {
         buttonPress.play()
-        console.log("pressed toggle")
         setJoinRoomVisible(!joinRoomVisible);
     };
 
     const renderCreateRoomOverlay = () => {
         if (createRoomVisible) {
             return (
-                <CreateRoomOverlay toggleCreateRoomOverlay={toggleCreateRoomOverlay} navigation={navigation} />
+                <RoomOverlay mode='create' overlayVisible={createRoomVisible} setOverlayVisible={setCreateRoomVisible} navigation={navigation} />
             )
         }
     }
 
     const renderJoinRoomOverlay = () => {
-
         if (joinRoomVisible) {
-
-            return <JoinRoomOverlay onBackdropPress={toggleJoinRoomOverlay} />
+            return <RoomOverlay mode='join' overlayVisible={joinRoomVisible} setOverlayVisible={setJoinRoomVisible} navigation={navigation} />
         }
     }
 
     return (
-
         <View style={styles.screen}>
             <Theme.ImageBackground source={'@backgroundImage'} style={styles.imageBackground}>
                 <View style={styles.topContainer}>
@@ -81,16 +75,13 @@ export default function MainMenu({ navigation }: MainMenuScreenProps) {
 
                 <View style={styles.menuContainer}>
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Toggle Theme" titleStyle={styles.buttonText} onPress={() => changeTheme()}
-                    />
-                    <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Vs AI" onPress={() => navigateWithSound("VsAI")} titleStyle={styles.buttonText}
                     />
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
                         title="Join Room" onPress={toggleJoinRoomOverlay} titleStyle={styles.buttonText} />
 
                     <ThemedButton raised containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                        title="Create Room" onPress={toggleCreateRoomOverlay} titleStyle={styles.buttonText}
+                        title="Create Room" onPress={createRoomHandler} titleStyle={styles.buttonText}
                     />
                     <>{renderCreateRoomOverlay()}</>
                     <>{renderJoinRoomOverlay()}</>
