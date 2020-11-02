@@ -733,7 +733,7 @@
   resolved "https://registry.yarnpkg.com/@colyseus/http/-/http-2.0.0.tgz#620209a3dd06f9c455de12128d22ebdffda05592"
   integrity sha512-GLg13402o160vBcjcO5uupVzf8FLAFtMQKvi7QdfxG2OvPFHx+s6wws5CAWOvcyqA97aR4Xzqxngp8AEX7ndNA==
 
-"@colyseus/schema@^1.0.0":
+"@colyseus/schema@^1.0.0", "@colyseus/schema@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@colyseus/schema/-/schema-1.0.1.tgz#cf554370597372366cbc06e4544e609e9e421052"
   integrity sha512-P5+PZ9zBEe+Ykw5W8Eo01BeWLQOziaM4lRTpS40R6/o+zH4gmOPzMaWhQlVoVHw0GEAqOfwUtbk9u7qPFbwtyQ==
@@ -1147,6 +1147,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@react-native-community/clipboard@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/clipboard/-/clipboard-1.5.1.tgz#32abb3ea2eb91ee3f9c5fb1d32d5783253c9fabe"
+  integrity sha512-AHAmrkLEH5UtPaDiRqoULERHh3oNv7Dgs0bTC0hO5Z2GdNokAMPT5w8ci8aMcRemcwbtdHjxChgtjbeA38GBdA==
+
 "@react-native-community/eslint-config@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-config/-/eslint-config-1.1.0.tgz#2dacad06dd44d13e778510864473fc6091f080c0"
@@ -1198,6 +1203,11 @@
   version "9.3.1"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-9.3.1.tgz#269d4755cb398e049b5014bf35adcc631a87d6d6"
   integrity sha512-TtCEwyO5+ZRvmlKMLz54qFshIWaDT9U162CjQX0mzybmogYKRM9UoB+mFnZLh7rKZQQgvVzzMfF+h2DUgN+9xQ==
+
+"@react-native-firebase/dynamic-links@^7.5.11":
+  version "7.5.11"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-7.5.11.tgz#608721033ef08c31e0c60efc53e10bdbb5e46c65"
+  integrity sha512-BjneOYZxS7ueBR1Tsp2m9MLCUpFQ7zk6IKMbQwIhWsTjz10YTaOw/li1Ac9TPFiqsv6ITrjoK1DonYSBJscwtw==
 
 "@react-navigation/core@^3.7.9":
   version "3.7.9"
@@ -6123,6 +6133,11 @@ react-native-screens@^2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.11.0.tgz#34b30b07c2d04aa100cba984b944b303bfa43ea6"
   integrity sha512-vJzJE3zI1XUtqthrX3Dh2TBQWB+xFyaGhF52KBq9FjJUN5ws4xpLZJxBWa1KbGV3DilmcSZ4jmZR5LGordwE7w==
+
+react-native-simple-toast@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-1.1.3.tgz#4d0835891fe5c9342341fc4a88ed01ebb1a34bd5"
+  integrity sha512-bkZy25axqlU4L6IoTysSl5KOQA7qdxzivbXz/L/yAw9g9fENxjzYvUUtv5wWtgq7mzOe5HiJ7GCQrOl3MhIevQ==
 
 react-native-size-matters@^0.3.1:
   version "0.3.1"

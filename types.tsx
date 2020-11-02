@@ -25,7 +25,8 @@ export interface PlayerProfileProps {
     avatar: string
 }
 export type overlayProps = {
-    overlayVisible: false,
-    setOverlayVisible: (overlayVisibility: boolean) => React.Dispatch<React.SetStateAction<boolean>>,
+    overlayVisible: boolean,
+    mode: 'create' | 'join',
+    setOverlayVisible: React.Dispatch<React.SetStateAction<boolean>>,
     navigation: StackNavigationProp<RootStackParamList, "MainMenu">
 }
