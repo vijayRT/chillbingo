@@ -8,7 +8,7 @@ import {API_URL} from '@env'
 
 GoogleSignin.configure({
     scopes: ['profile', 'email'],
-    webClientId: '29324035126-hdd4a8uelaju6rprjhonbigp82llpard.apps.googleusercontent.com'
+    webClientId: process.env.WEB_CLIENT_ID,
 });
 
 const { persist, purge } = configurePersist({
